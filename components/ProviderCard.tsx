@@ -7,7 +7,6 @@ import {
   MdOutlineStar,
   MdOutlineStarBorder,
   MdStarHalf,
-  MdTrendingUp,
 } from "react-icons/md";
 import {
   Tooltip,
@@ -16,7 +15,6 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { Info } from "lucide-react";
-import { LiaMedalSolid } from "react-icons/lia";
 import { TiLocation } from "react-icons/ti";
 import { HiFire } from "react-icons/hi";
 
