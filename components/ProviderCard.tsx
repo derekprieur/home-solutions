@@ -97,7 +97,7 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
                 /5
               </h4>
               <TooltipProvider>
-                <Tooltip>
+                <Tooltip delayDuration={0}>
                   <TooltipTrigger
                     asChild
                     className="absolute -top-1 -right-4 cursor-pointer"
