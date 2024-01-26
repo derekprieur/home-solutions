@@ -94,20 +94,20 @@ const ServicesFilter = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild className="max-w-56">
+      <PopoverTrigger asChild className="max-w-56 z-50">
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between text-sm text-gray-600 font-semibold"
+          className="justify-between text-sm text-gray-600 font-semibold z-50"
         >
           <p className="truncate">{getDisplayText()}</p>
           <ChevronDown className="h-4 w-4 ml-2 text-blue-600 shrink-0" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="max-h-80 w-[180px] p-0">
-        <Command>
-          <CommandInput placeholder="Search filters..." className="h-9" />
+      <PopoverContent className="max-h-80 w-[180px] p-0 z-50">
+        <Command className="z-50">
+          <CommandInput placeholder="Search filters..." className="h-9 z-50" />
           <CommandEmpty>No filters found.</CommandEmpty>
           <CommandGroup className="max-h-80 overflow-y-auto">
             {uniqueServices.map((service, index) => (
