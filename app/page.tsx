@@ -14,6 +14,7 @@ import ServicesFilter from "@/components/ServicesFilter";
 import axios from "axios";
 import { data } from "@/constants/data";
 import { Circle, Loader2 } from "lucide-react";
+import RatingFilter from "@/components/RatingFilter";
 
 export default function Home() {
   const [selectedRating, setSelectedRating] = useState<any>(null);
@@ -97,22 +98,7 @@ export default function Home() {
       <div className="flex flex-col gap-4">
         {!isLoading && (
           <div className="flex justify-end gap-3">
-            <Select
-              onValueChange={(value: any) => setSelectedRating(Number(value))}
-            >
-              <SelectTrigger className="w-fit text-gray-600 font-semibold text-sm">
-                <SelectValue placeholder="STAR RATING" className="" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value={"all"}>All Ratings</SelectItem>
-                  <SelectItem value={"5"}>5 Stars</SelectItem>
-                  <SelectItem value={"4.5"}>4.5 Stars</SelectItem>
-                  <SelectItem value={"4"}>4 Stars</SelectItem>
-                  <SelectItem value={"3.5"}>3.5 Stars</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <RatingFilter setSelectedRating={setSelectedRating} />
             <ServicesFilter
               data={filteredData}
               setData={setFilteredData}
