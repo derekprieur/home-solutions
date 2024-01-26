@@ -15,6 +15,7 @@ import axios from "axios";
 import { data } from "@/constants/data";
 import { Circle, Loader2 } from "lucide-react";
 import RatingFilter from "@/components/RatingFilter";
+import DistanceFilter from "@/components/DistanceFilter";
 
 export default function Home() {
   const [selectedRating, setSelectedRating] = useState<any>(null);
@@ -104,20 +105,7 @@ export default function Home() {
               setData={setFilteredData}
               setSelectedServices={setSelectedServices}
             />
-            <Select onValueChange={(value: any) => setSelectedDistance(value)}>
-              <SelectTrigger className="w-fit text-gray-600 font-semibold text-sm">
-                <SelectValue placeholder="DISTANCE" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="all">All Distances</SelectItem>
-                  <SelectItem value="5">5 Miles</SelectItem>
-                  <SelectItem value="10">10 Miles</SelectItem>
-                  <SelectItem value="15">15 Miles</SelectItem>
-                  <SelectItem value="20">20 Miles</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <DistanceFilter setSelectedDistance={setSelectedDistance} />
           </div>
         )}
         {isLoading ? (
