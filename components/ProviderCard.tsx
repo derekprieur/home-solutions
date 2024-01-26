@@ -34,6 +34,8 @@ export interface ProviderCardProps {
         review_score: number;
       };
     };
+    distance: number;
+    review_count: number;
   };
 }
 
@@ -78,7 +80,9 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
               Get Quote
             </Button>
           </div>
-          <h2 className="mt-4 font-bold text-xl text-black">{provider.name}</h2>
+          <h2 className="mt-4 font-bold text-xl text-black truncate">
+            {provider.name}
+          </h2>
           <div className="mt-2 flex flex-row items-center gap-1">
             <div className="flex flex-row">
               {renderStars(
@@ -118,15 +122,19 @@ const ProviderCard = ({ provider }: ProviderCardProps) => {
             </div>
             <p className="ml-4 text-xs text-black">| {provider.address}</p>
           </div>
-          <div className="mt-3 flex items-center gap-2">
-            <div className="flex items-center">
-              <TiLocation className="text-green-600 text-2xl" />
-              <h3 className="font-semibold text-black">Nearby</h3>
-            </div>
-            <div className="flex items-center">
-              <HiFire className="text-green-600 text-2xl" />
-              <h3 className="font-semibold text-black">Popular</h3>
-            </div>
+          <div className="mt-3 flex items-center gap-2 h-4">
+            {provider.distance <= 5 && (
+              <div className="flex items-center">
+                <TiLocation className="text-green-600 text-2xl" />
+                <h3 className="font-semibold text-black">Nearby</h3>
+              </div>
+            )}
+            {provider.review_count >= 100 && (
+              <div className="flex items-center">
+                <HiFire className="text-green-600 text-2xl" />
+                <h3 className="font-semibold text-black">Popular</h3>
+              </div>
+            )}
           </div>
           <div className="mt-6">
             <div className="h-32 overflow-y-auto">
