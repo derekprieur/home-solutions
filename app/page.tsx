@@ -18,6 +18,7 @@ import { Circle, Loader2 } from "lucide-react";
 export default function Home() {
   const [selectedRating, setSelectedRating] = useState<any>(null);
   const [selectedServices, setSelectedServices] = useState<any>([]);
+  const [selectedDistance, setSelectedDistance] = useState<string>("all");
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -54,6 +55,43 @@ export default function Home() {
     }
   }, [selectedServices]);
 
+  useEffect(() => {
+    if (selectedDistance === "all") {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(
+        (provider) => provider.distance <= parseInt(selectedDistance)
+      );
+      setFilteredData(filtered);
+    }
+  }, [selectedDistance]);
+
+  useEffect(() => {
+    let filteredByRating = data;
+    if (selectedRating) {
+      filteredByRating = data.filter(
+        (provider) => provider.review_score >= selectedRating
+      );
+    }
+
+    if (selectedDistance !== "all") {
+      const distanceInMiles = parseInt(selectedDistance);
+      filteredByRating = filteredByRating.filter(
+        (provider) => provider.distance <= distanceInMiles
+      );
+    }
+
+    if (selectedServices.length > 0) {
+      filteredByRating = filteredByRating.filter((provider) =>
+        selectedServices.every((selectedService: string) =>
+          provider.services.includes(selectedService)
+        )
+      );
+    }
+
+    setFilteredData(filteredByRating);
+  }, [selectedRating, selectedDistance, selectedServices]);
+
   return (
     <main className="w-full justify-center items-center h-full pt-16 px-2">
       <div className="flex flex-col gap-4">
@@ -69,7 +107,7 @@ export default function Home() {
                 <SelectGroup>
                   <SelectItem value={"all"}>All Ratings</SelectItem>
                   <SelectItem value={"5"}>5 Stars</SelectItem>
-                  <SelectItem value={"4.5"}>4 Stars</SelectItem>
+                  <SelectItem value={"4.5"}>4.5 Stars</SelectItem>
                   <SelectItem value={"4"}>4 Stars</SelectItem>
                   <SelectItem value={"3.5"}>3.5 Stars</SelectItem>
                 </SelectGroup>
@@ -80,13 +118,17 @@ export default function Home() {
               setData={setFilteredData}
               setSelectedServices={setSelectedServices}
             />
-            <Select>
-              <SelectTrigger className="w-fit">
+            <Select onValueChange={(value: any) => setSelectedDistance(value)}>
+              <SelectTrigger className="w-fit text-gray-600 font-semibold text-sm">
                 <SelectValue placeholder="DISTANCE" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="all">All Distances</SelectItem>
+                  <SelectItem value="5">5 Miles</SelectItem>
+                  <SelectItem value="10">10 Miles</SelectItem>
+                  <SelectItem value="15">15 Miles</SelectItem>
+                  <SelectItem value="20">20 Miles</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

@@ -54,8 +54,8 @@ const ServicesFilter = ({
     setSelectedServices(updatedSelectedValues);
 
     const filteredData = data.filter((provider) =>
-      provider.services.some((service: string) =>
-        updatedSelectedValues.includes(service)
+      updatedSelectedValues.every((selectedService) =>
+        provider.services.includes(selectedService)
       )
     );
 
@@ -64,6 +64,7 @@ const ServicesFilter = ({
 
   useEffect(() => {
     let services: string[] = [];
+    console.log(data, "data use effect");
     data.forEach((provider) => {
       provider.services.forEach((service: any) => {
         if (!services.includes(service)) {
