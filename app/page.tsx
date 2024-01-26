@@ -1,7 +1,6 @@
 "use client";
 
 import ProviderCard, { ProviderCardProps } from "@/components/ProviderCard";
-import { data } from "../constants/data";
 import {
   Select,
   SelectContent,
@@ -12,11 +11,27 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import ServicesFilter from "@/components/ServicesFilter";
+import axios from "axios";
+import { data } from "@/constants/data";
 
 export default function Home() {
   const [selectedRating, setSelectedRating] = useState<any>(null);
   const [selectedServices, setSelectedServices] = useState<any>([]);
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios("/api/data");
+      setFilteredData(response.data);
+      console.log(response.data, "response.data");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (selectedRating) {
@@ -33,9 +48,6 @@ export default function Home() {
       setFilteredData(data);
     }
   }, [selectedServices]);
-
-  console.log(selectedRating, "selectedRating");
-  console.log(filteredData, "filteredData");
 
   return (
     <main className="w-full justify-center items-center h-full pt-16 px-2">
