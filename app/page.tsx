@@ -41,17 +41,19 @@ export default function Home() {
     <main className="w-full justify-center items-center h-full pt-16 px-2">
       <div className="flex flex-col gap-4">
         <div className="flex justify-end gap-3">
-          <Select onValueChange={(value: any) => setSelectedRating(value)}>
+          <Select
+            onValueChange={(value: any) => setSelectedRating(Number(value))}
+          >
             <SelectTrigger className="w-fit text-gray-600 font-semibold text-sm">
               <SelectValue placeholder="STAR RATING" className="" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value={null}>All Ratings</SelectItem>
-                <SelectItem value={5}>5 Stars</SelectItem>
-                <SelectItem value={4.5}>4 Stars</SelectItem>
-                <SelectItem value={4}>4 Stars</SelectItem>
-                <SelectItem value={3.5}>3.5 Stars</SelectItem>
+                <SelectItem value={"all"}>All Ratings</SelectItem>
+                <SelectItem value={"5"}>5 Stars</SelectItem>
+                <SelectItem value={"4.5"}>4 Stars</SelectItem>
+                <SelectItem value={"4"}>4 Stars</SelectItem>
+                <SelectItem value={"3.5"}>3.5 Stars</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
